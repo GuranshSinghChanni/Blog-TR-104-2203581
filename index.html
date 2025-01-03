@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog TR-104</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      header {
+        background-color: #0078fe;
+        color: white;
+        padding: 5px;
+        text-align: center;
+      }
+      main {
+        padding: 20px;
+      }
+      .week-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
+      }
+      .week {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        width: 300px;
+        padding: 15px;
+        transition: transform 0.2s, box-shadow 0.2s;
+      }
+      .week:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      }
+      .week h3 {
+        margin: 0;
+      }
+      .details {
+        margin-top: 10px;
+        text-align: left;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Blog TR-104</h1>
+    </header>
+    <main>
+      <div class="week-container" id="weeks"></div>
+    </main>
+
+    <script>
+      const courseData = [
+        {
+          week: 1,
+          summary: "HTML",
+          details: [
+            "Day 1: Introduction to HTML",
+            "Day 2: Basic Tags",
+            "Day 3: Forms",
+            "Day 4: Tables",
+            "Day 5: Semantic HTML",
+          ],
+        },
+        {
+          week: 2,
+          summary: "CSS",
+          details: [
+            "Day 1: Introduction to CSS",
+            "Day 2: Selectors",
+            "Day 3: Box Model",
+            "Day 4: Flexbox",
+            "Day 5: Grid",
+          ],
+        },
+        {
+          week: 3,
+          summary: "Extension of CSS",
+          details: [
+            "Day 1: Responsive Design",
+            "Day 2: Media Queries",
+            "Day 3: CSS Variables",
+            "Day 4: Animations",
+            "Day 5: Preprocessors",
+          ],
+        },
+        {
+          week: 4,
+          summary: "JavaScript Basics",
+          details: [
+            "Day 1: Introduction",
+            "Day 2: Variables",
+            "Day 3: Functions",
+            "Day 4: Loops",
+            "Day 5: DOM Manipulation",
+          ],
+        },
+        {
+          week: 5,
+          summary: "JavaScript Basics",
+          details: [
+            "Day 1: Arrays",
+            "Day 2: Objects",
+            "Day 3: Events",
+            "Day 4: ES6 Syntax",
+            "Day 5: Debugging",
+          ],
+        },
+        {
+          week: 6,
+          summary: "Advanced JavaScript",
+          details: [
+            "Day 1: Closures",
+            "Day 2: Async/Await",
+            "Day 3: Promises",
+            "Day 4: Modules",
+            "Day 5: Error Handling",
+          ],
+        },
+        {
+          week: 7,
+          summary: "Advanced JavaScript",
+          details: [
+            "Day 1: Prototypes",
+            "Day 2: Classes",
+            "Day 3: Destructuring",
+            "Day 4: Spread Operator",
+            "Day 5: Map/Reduce",
+          ],
+        },
+        {
+          week: 8,
+          summary: "Advanced JavaScript",
+          details: [
+            "Day 1: Hoisting",
+            "Day 2: Scope",
+            "Day 3: Closures",
+            "Day 4: Event Loop",
+            "Day 5: Best Practices",
+          ],
+        },
+        {
+          week: 9,
+          summary: "Basic React",
+          details: [
+            "Day 1: Introduction to React",
+            "Day 2: JSX",
+            "Day 3: Components",
+            "Day 4: Props",
+            "Day 5: State",
+          ],
+        },
+        {
+          week: 10,
+          summary: "Basic React",
+          details: [
+            "Day 1: Event Handling",
+            "Day 2: Lists and Keys",
+            "Day 3: Forms",
+            "Day 4: Lifecycle Methods",
+            "Day 5: Conditional Rendering",
+          ],
+        },
+        {
+          week: 11,
+          summary: "Advanced React",
+          details: [
+            "Day 1: Hooks",
+            "Day 2: Context API",
+            "Day 3: Higher Order Components",
+            "Day 4: Render Props",
+            "Day 5: Error Boundaries",
+          ],
+        },
+        {
+          week: 12,
+          summary: "Advanced React",
+          details: [
+            "Day 1: React Router",
+            "Day 2: Redux Basics",
+            "Day 3: Redux Middleware",
+            "Day 4: Redux Toolkit",
+            "Day 5: Performance Optimization",
+          ],
+        },
+        {
+          week: 13,
+          summary: "Advanced React",
+          details: [
+            "Day 1: Code Splitting",
+            "Day 2: Lazy Loading",
+            "Day 3: Testing Components",
+            "Day 4: Custom Hooks",
+            "Day 5: Deployment",
+          ],
+        },
+        {
+          week: 14,
+          summary: "Node.js",
+          details: [
+            "Day 1: Introduction",
+            "Day 2: File System",
+            "Day 3: Modules",
+            "Day 4: Streams",
+            "Day 5: Event Loop",
+          ],
+        },
+        {
+          week: 15,
+          summary: "Node.js",
+          details: [
+            "Day 1: HTTP Module",
+            "Day 2: Creating APIs",
+            "Day 3: Error Handling",
+            "Day 4: Debugging",
+            "Day 5: Best Practices",
+          ],
+        },
+        {
+          week: 16,
+          summary: "Node.js",
+          details: [
+            "Day 1: Authentication",
+            "Day 2: Authorization",
+            "Day 3: File Uploads",
+            "Day 4: Performance",
+            "Day 5: Deployment",
+          ],
+        },
+        {
+          week: 17,
+          summary: "Express.js",
+          details: [
+            "Day 1: Basics of Express",
+            "Day 2: Routing",
+            "Day 3: Middleware",
+            "Day 4: Error Handling",
+            "Day 5: Security",
+          ],
+        },
+        {
+          week: 18,
+          summary: "MongoDB",
+          details: [
+            "Day 1: Basics of MongoDB",
+            "Day 2: CRUD Operations",
+            "Day 3: Aggregations",
+            "Day 4: Indexing",
+            "Day 5: Best Practices",
+          ],
+        },
+        {
+          week: 19,
+          summary: "Authentication",
+          details: [
+            "Day 1: OAuth",
+            "Day 2: JWT",
+            "Day 3: Sessions",
+            "Day 4: Security Best Practices",
+            "Day 5: Implementation",
+          ],
+        },
+        {
+          week: 20,
+          summary: "Full Stack Integration",
+          details: [
+            "Day 1: Connecting Frontend and Backend",
+            "Day 2: REST APIs",
+            "Day 3: Error Handling",
+            "Day 4: Debugging",
+            "Day 5: Testing",
+          ],
+        },
+        {
+          week: 21,
+          summary: "Project",
+          details: [
+            "Day 1: Planning",
+            "Day 2: Setup",
+            "Day 3: Development",
+            "Day 4: Testing",
+            "Day 5: Deployment",
+          ],
+        },
+        {
+          week: 22,
+          summary: "Project",
+          details: [
+            "Day 1: Advanced Features",
+            "Day 2: Optimization",
+            "Day 3: Testing",
+            "Day 4: Documentation",
+            "Day 5: Deployment",
+          ],
+        },
+        {
+          week: 23,
+          summary: "Project",
+          details: [
+            "Day 1: Bug Fixing",
+            "Day 2: Optimization",
+            "Day 3: Final Review",
+            "Day 4: Deployment",
+            "Day 5: Presentation",
+          ],
+        },
+        {
+          week: 24,
+          summary: "Project",
+          details: [
+            "Day 1: Wrap-up",
+            "Day 2: Team Review",
+            "Day 3: Presentation",
+            "Day 4: Documentation",
+            "Day 5: Feedback",
+          ],
+        },
+      ];
+
+      const weeksContainer = document.getElementById("weeks");
+
+      courseData.forEach((weekData) => {
+        const weekDiv = document.createElement("div");
+        weekDiv.classList.add("week");
+
+        const title = document.createElement("h3");
+        title.textContent = `Week ${weekData.week}`;
+
+        const summary = document.createElement("h4");
+        summary.textContent = `Topic - ${weekData.summary}`;
+
+        const details = document.createElement("h4");
+        details.textContent = "Details -";
+
+        const detailsDiv = document.createElement("div");
+        detailsDiv.classList.add("details");
+        weekData.details.forEach((detail) => {
+          const detailP = document.createElement("p");
+          detailP.textContent = detail;
+          detailsDiv.appendChild(detailP);
+        });
+
+        weekDiv.appendChild(title);
+        weekDiv.appendChild(summary);
+        weekDiv.appendChild(details);
+        weekDiv.appendChild(detailsDiv);
+
+        weeksContainer.appendChild(weekDiv);
+      });
+    </script>
+  </body>
+</html>
