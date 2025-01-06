@@ -19,13 +19,13 @@
       main {
         padding: 20px;
       }
-      .week-container {
+      .day-container {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
       }
-      .week {
+      .day {
         background-color: white;
         border: 1px solid #ddd;
         border-radius: 8px;
@@ -34,11 +34,11 @@
         padding: 15px;
         transition: transform 0.2s, box-shadow 0.2s;
       }
-      .week:hover {
+      .day:hover {
         transform: translateY(-5px);
         box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
       }
-      .week h3 {
+      .day h3 {
         margin: 0;
       }
       .details {
@@ -52,306 +52,651 @@
       <h1>Blog TR-104</h1>
     </header>
     <main>
-      <div class="week-container" id="weeks"></div>
+      <div class="day-container" id="days"></div>
     </main>
 
     <script>
       const courseData = [
         {
-          week: 1,
-          summary: "HTML",
-          details: [
-            "Day 1: Introduction to HTML",
-            "Day 2: Basic Tags",
-            "Day 3: Forms",
-            "Day 4: Tables",
-            "Day 5: Semantic HTML",
-          ],
+          Topic: "Introduction to HTML",
+          Date: "25.07.24",
+          details:
+            "Gain an understanding of HTML, its purpose, and its structure. Learn the basics of creating web pages and explore the foundational elements of markup.",
         },
         {
-          week: 2,
-          summary: "CSS",
-          details: [
-            "Day 1: Introduction to CSS",
-            "Day 2: Selectors",
-            "Day 3: Box Model",
-            "Day 4: Flexbox",
-            "Day 5: Grid",
-          ],
+          Topic: "Basic Tags",
+          Date: "26.07.24",
+          details:
+            "Explore the fundamental HTML tags used in structuring web pages, including headings, paragraphs, and links. Practice creating simple web content.",
         },
         {
-          week: 3,
-          summary: "Extension of CSS",
-          details: [
-            "Day 1: Responsive Design",
-            "Day 2: Media Queries",
-            "Day 3: CSS Variables",
-            "Day 4: Animations",
-            "Day 5: Preprocessors",
-          ],
+          Topic: "Forms",
+          Date: "29.07.24",
+          details:
+            "Learn how to create interactive forms, including input fields, checkboxes, and dropdowns. Understand form validation and data collection techniques.",
         },
         {
-          week: 4,
-          summary: "JavaScript Basics",
-          details: [
-            "Day 1: Introduction",
-            "Day 2: Variables",
-            "Day 3: Functions",
-            "Day 4: Loops",
-            "Day 5: DOM Manipulation",
-          ],
+          Topic: "Tables",
+          Date: "30.07.24",
+          details:
+            "Discover how to structure data in tables using HTML. Learn about table headers, rows, columns, and the importance of accessibility.",
         },
         {
-          week: 5,
-          summary: "JavaScript Basics",
-          details: [
-            "Day 1: Arrays",
-            "Day 2: Objects",
-            "Day 3: Events",
-            "Day 4: ES6 Syntax",
-            "Day 5: Debugging",
-          ],
+          Topic: "Semantic HTML",
+          Date: "31.07.24",
+          details:
+            "Understand the significance of semantic HTML and how it improves accessibility and SEO. Explore tags like &ltarticle&gt, &ltsection&gt, and &ltaside&gt.",
         },
         {
-          week: 6,
-          summary: "Advanced JavaScript",
-          details: [
-            "Day 1: Closures",
-            "Day 2: Async/Await",
-            "Day 3: Promises",
-            "Day 4: Modules",
-            "Day 5: Error Handling",
-          ],
+          Topic: "Introduction to CSS",
+          Date: "01.08.24",
+          details:
+            "Learn the basics of styling web pages using CSS. Explore the relationship between HTML and CSS and how they work together to create visually appealing content.",
         },
         {
-          week: 7,
-          summary: "Advanced JavaScript",
-          details: [
-            "Day 1: Prototypes",
-            "Day 2: Classes",
-            "Day 3: Destructuring",
-            "Day 4: Spread Operator",
-            "Day 5: Map/Reduce",
-          ],
+          Topic: "Selectors",
+          Date: "02.08.24",
+          details:
+            "Delve into the different types of CSS selectors, including class, ID, and pseudo-selectors. Learn how to target and style specific elements effectively.",
         },
         {
-          week: 8,
-          summary: "Advanced JavaScript",
-          details: [
-            "Day 1: Hoisting",
-            "Day 2: Scope",
-            "Day 3: Closures",
-            "Day 4: Event Loop",
-            "Day 5: Best Practices",
-          ],
+          Topic: "Box Model",
+          Date: "05.08.24",
+          details:
+            "Understand the CSS box model and its impact on layout. Explore concepts like margins, borders, padding, and content area.",
         },
         {
-          week: 9,
-          summary: "Basic React",
-          details: [
-            "Day 1: Introduction to React",
-            "Day 2: JSX",
-            "Day 3: Components",
-            "Day 4: Props",
-            "Day 5: State",
-          ],
+          Topic: "Flexbox",
+          Date: "06.08.24",
+          details:
+            "Learn about the flexible box layout module (Flexbox) for creating responsive designs. Understand its properties and how to align and distribute items.",
         },
         {
-          week: 10,
-          summary: "Basic React",
-          details: [
-            "Day 1: Event Handling",
-            "Day 2: Lists and Keys",
-            "Day 3: Forms",
-            "Day 4: Lifecycle Methods",
-            "Day 5: Conditional Rendering",
-          ],
+          Topic: "Grid",
+          Date: "07.08.24",
+          details:
+            "Explore CSS Grid for designing complex layouts. Learn how to define grid templates, rows, and columns for advanced web page structures.",
         },
         {
-          week: 11,
-          summary: "Advanced React",
-          details: [
-            "Day 1: Hooks",
-            "Day 2: Context API",
-            "Day 3: Higher Order Components",
-            "Day 4: Render Props",
-            "Day 5: Error Boundaries",
-          ],
+          Topic: "Resposive Design",
+          Date: "08.08.24",
+          details:
+            "Learn how to make designs responsive using media queries. Explore techniques to adapt designs to different screen sizes and devices.",
         },
         {
-          week: 12,
-          summary: "Advanced React",
-          details: [
-            "Day 1: React Router",
-            "Day 2: Redux Basics",
-            "Day 3: Redux Middleware",
-            "Day 4: Redux Toolkit",
-            "Day 5: Performance Optimization",
-          ],
+          Topic: "CSS Variables",
+          Date: "09.08.24",
+          details:
+            "Understand CSS variables for managing reusable values. Learn how to create, use, and update variables for efficient styling.",
         },
         {
-          week: 13,
-          summary: "Advanced React",
-          details: [
-            "Day 1: Code Splitting",
-            "Day 2: Lazy Loading",
-            "Day 3: Testing Components",
-            "Day 4: Custom Hooks",
-            "Day 5: Deployment",
-          ],
+          Topic: "Animations",
+          Date: "12.08.24",
+          details:
+            "Learn about CSS animations to bring web elements to life. Explore keyframes and transitions to create engaging user experiences.",
         },
         {
-          week: 14,
-          summary: "Node.js",
-          details: [
-            "Day 1: Introduction",
-            "Day 2: File System",
-            "Day 3: Modules",
-            "Day 4: Streams",
-            "Day 5: Event Loop",
-          ],
+          Topic: "Preprocessors",
+          Date: "13.08.24",
+          details:
+            "Explore preprocessors like SASS and LESS for writing maintainable and scalable CSS. Learn their syntax and benefits for larger projects.",
         },
         {
-          week: 15,
-          summary: "Node.js",
-          details: [
-            "Day 1: HTTP Module",
-            "Day 2: Creating APIs",
-            "Day 3: Error Handling",
-            "Day 4: Debugging",
-            "Day 5: Best Practices",
-          ],
+          Topic: "Introduction to JavaScript",
+          Date: "14.08.24",
+          details:
+            "Introduction to JavaScript and its role in making web pages interactive. Understand its syntax and how it integrates with HTML.",
         },
         {
-          week: 16,
-          summary: "Node.js",
-          details: [
-            "Day 1: Authentication",
-            "Day 2: Authorization",
-            "Day 3: File Uploads",
-            "Day 4: Performance",
-            "Day 5: Deployment",
-          ],
+          Topic: "JS Variables",
+          Date: "16.08.24",
+          details:
+            "Learn about JavaScript variables, data types, and how to declare them. Understand variable scoping and initialization.",
         },
         {
-          week: 17,
-          summary: "Express.js",
-          details: [
-            "Day 1: Basics of Express",
-            "Day 2: Routing",
-            "Day 3: Middleware",
-            "Day 4: Error Handling",
-            "Day 5: Security",
-          ],
+          Topic: "JS Functions",
+          Date: "19.08.24",
+          details:
+            "Dive into JavaScript functions, their syntax, and applications. Understand how to create reusable code blocks and function expressions.",
         },
         {
-          week: 18,
-          summary: "MongoDB",
-          details: [
-            "Day 1: Basics of MongoDB",
-            "Day 2: CRUD Operations",
-            "Day 3: Aggregations",
-            "Day 4: Indexing",
-            "Day 5: Best Practices",
-          ],
+          Topic: "JS Loops",
+          Date: "20.08.24",
+          details:
+            "Master JavaScript loops, including for, while, and forEach. Learn to iterate over arrays and objects for efficient data handling.",
         },
         {
-          week: 19,
-          summary: "Authentication",
-          details: [
-            "Day 1: OAuth",
-            "Day 2: JWT",
-            "Day 3: Sessions",
-            "Day 4: Security Best Practices",
-            "Day 5: Implementation",
-          ],
+          Topic: "DOM Manuplation",
+          Date: "21.08.24",
+          details:
+            "Understand the Document Object Model (DOM) and how to manipulate it using JavaScript. Learn to dynamically update web content.",
         },
         {
-          week: 20,
-          summary: "Full Stack Integration",
-          details: [
-            "Day 1: Connecting Frontend and Backend",
-            "Day 2: REST APIs",
-            "Day 3: Error Handling",
-            "Day 4: Debugging",
-            "Day 5: Testing",
-          ],
+          Topic: "JS Arrays",
+          Date: "22.08.24",
+          details:
+            "Explore JavaScript arrays and methods for managing collections of data. Learn how to sort, filter, and transform data efficiently.",
         },
         {
-          week: 21,
-          summary: "Project",
-          details: [
-            "Day 1: Planning",
-            "Day 2: Setup",
-            "Day 3: Development",
-            "Day 4: Testing",
-            "Day 5: Deployment",
-          ],
+          Topic: "JS Objects",
+          Date: "23.08.24",
+          details:
+            "Learn about JavaScript objects and their key-value structure. Understand how to create, access, and manipulate object properties.",
         },
         {
-          week: 22,
-          summary: "Project",
-          details: [
-            "Day 1: Advanced Features",
-            "Day 2: Optimization",
-            "Day 3: Testing",
-            "Day 4: Documentation",
-            "Day 5: Deployment",
-          ],
+          Topic: "JS Events",
+          Date: "26.08.24",
+          details:
+            "Understand how to handle user-generated events in JavaScript. Learn to attach event listeners and create interactive web experiences.",
         },
         {
-          week: 23,
-          summary: "Project",
-          details: [
-            "Day 1: Bug Fixing",
-            "Day 2: Optimization",
-            "Day 3: Final Review",
-            "Day 4: Deployment",
-            "Day 5: Presentation",
-          ],
+          Topic: "ES6 Syntax",
+          Date: "27.08.24",
+          details:
+            "Master ES6 syntax, including let, const, arrow functions, and template literals. Learn modern JavaScript best practices.",
         },
         {
-          week: 24,
-          summary: "Project",
-          details: [
-            "Day 1: Wrap-up",
-            "Day 2: Team Review",
-            "Day 3: Presentation",
-            "Day 4: Documentation",
-            "Day 5: Feedback",
-          ],
+          Topic: "Debugging",
+          Date: "28.08.24",
+          details:
+            "Understand how to debug JavaScript code using browser tools. Learn techniques to identify and resolve issues effectively.",
+        },
+        {
+          Topic: "Closures",
+          Date: "29.08.24",
+          details:
+            "Explore JavaScript closures and their applications. Understand the concepts of lexical scoping and private variables.",
+        },
+        {
+          Topic: "Async/Await",
+          Date: "30.08.24",
+          details:
+            "Learn about async/await for handling asynchronous operations. Understand how it simplifies code compared to traditional callbacks.",
+        },
+        {
+          Topic: "Promises",
+          Date: "02.09.24",
+          details:
+            "Dive into JavaScript Promises and their usage in managing asynchronous code. Learn methods like .then() and .catch() for handling success and errors.",
+        },
+        {
+          Topic: "Modules",
+          Date: "03.09.24",
+          details:
+            "Understand JavaScript modules for organizing code. Learn about importing and exporting functionalities between files for modular development.",
+        },
+        {
+          Topic: "Error Handling",
+          Date: "04.09.24",
+          details:
+            "Master JavaScript error handling using try, catch, and finally. Learn best practices for creating robust applications.",
+        },
+        {
+          Topic: "Prototypes",
+          Date: "05.09.24",
+          details:
+            "Explore JavaScript prototypes for inheritance and code reuse. Learn how to create and extend objects effectively.",
+        },
+        {
+          Topic: "Classes",
+          Date: "06.09.24",
+          details:
+            "Understand JavaScript classes for object-oriented programming. Learn about constructors, methods, and inheritance in ES6 classes.",
+        },
+        {
+          Topic: "Destructuring",
+          Date: "09.09.24",
+          details:
+            "Learn destructuring assignment for extracting values from arrays and objects. Simplify your code with concise variable declarations.",
+        },
+        {
+          Topic: "Spread Operator",
+          Date: "10.09.24",
+          details:
+            "Explore the spread and rest operators for working with arrays and objects. Learn how to simplify code for merging and destructuring data.",
+        },
+        {
+          Topic: "Map/Reduce",
+          Date: "11.09.24",
+          details:
+            "Master JavaScript array methods like map and reduce for transforming data. Learn how to use these methods in functional programming.",
+        },
+        {
+          Topic: "Hoisting",
+          Date: "12.09.24",
+          details:
+            "Understand JavaScript hoisting and how it affects variable and function declarations. Learn to write predictable and bug-free code.",
+        },
+        {
+          Topic: "Scope",
+          Date: "13.09.24",
+          details:
+            "Explore the concept of scope in JavaScript, including global, local, and block scope. Understand how closures relate to scope.",
+        },
+        {
+          Topic: "Event Loop",
+          Date: "16.09.24",
+          details:
+            "Learn about the event loop and how JavaScript handles asynchronous tasks. Understand the call stack, microtasks, and macrotasks.",
+        },
+        {
+          Topic: "Best Practices",
+          Date: "17.09.24",
+          details:
+            "Explore best practices for writing clean and maintainable JavaScript. Learn techniques to improve readability and performance.",
+        },
+        {
+          Topic: "Introduction to React",
+          Date: "18.09.24",
+          details:
+            "Begin with React by learning its purpose, component-based architecture, and virtual DOM. Set up a React environment and start coding.",
+        },
+        {
+          Topic: "JSX",
+          Date: "19.09.24",
+          details:
+            "Understand JSX, React's syntax extension for JavaScript. Learn how to write elements and components that render dynamic content.",
+        },
+        {
+          Topic: "Components",
+          Date: "20.09.24",
+          details:
+            "Explore React components, their types (class and functional), and their role in building reusable UI elements.",
+        },
+        {
+          Topic: "Props",
+          Date: "23.09.24",
+          details:
+            "Learn about props in React for passing data between components. Understand their immutability and role in component communication.",
+        },
+        {
+          Topic: "State",
+          Date: "24.09.24",
+          details:
+            "Master state in React for managing component-specific data. Learn how to update and render state dynamically.",
+        },
+        {
+          Topic: "Event Handling",
+          Date: "25.09.24",
+          details:
+            "Understand event handling in React. Learn how to bind events, pass arguments, and create interactive UI elements.",
+        },
+        {
+          Topic: "Lists and Keys",
+          Date: "26.09.24",
+          details:
+            "Learn about React lists and keys for rendering multiple elements. Understand how to use keys for efficient re-rendering.",
+        },
+        {
+          Topic: "Forms",
+          Date: "27.09.24",
+          details:
+            "Master React forms and controlled components. Learn how to manage form inputs and handle validation effectively.",
+        },
+        {
+          Topic: "Lifecycle Methods",
+          Date: "30.09.24",
+          details:
+            "Explore React lifecycle methods in class components. Learn about mounting, updating, and unmounting phases.",
+        },
+        {
+          Topic: "Conditional Rendering",
+          Date: "01.10.24",
+          details:
+            "Understand conditional rendering in React. Learn techniques to render UI elements based on conditions.",
+        },
+        {
+          Topic: "Hooks",
+          Date: "03.10.24",
+          details:
+            "Understand the hooks in React. Learn how to import and use types of hooks in components.",
+        },
+        {
+          Topic: "Higher Order Components",
+          Date: "04.10.24",
+          details:
+            "Explore higher-order components (HOCs) in React for reusing component logic. Learn how to compose components effectively.",
+        },
+        {
+          Topic: "Render Props",
+          Date: "07.10.24",
+          details:
+            "Learn about render props in React for sharing component logic. Understand how to pass functions as props to components.",
+        },
+        {
+          Topic: "Error Boundaries",
+          Date: "08.10.24",
+          details:
+            "Master error boundaries in React to catch and handle errors in components. Learn to provide fallback UI for better user experience.",
+        },
+        {
+          Topic: "React Router",
+          Date: "09.10.24",
+          details:
+            "Explore React Router for creating navigation in single-page applications. Learn about routes, links, and navigation parameters.",
+        },
+        {
+          Topic: "Redux Basics",
+          Date: "10.10.24",
+          details:
+            "Understand the basics of Redux for state management in React. Learn about actions, reducers, and the store.",
+        },
+        {
+          Topic: "Redux Middleware",
+          Date: "11.10.24",
+          details:
+            "Learn about Redux middleware to handle side effects like asynchronous actions. Explore middleware libraries such as Redux Thunk.",
+        },
+        {
+          Topic: "Redux Toolkit",
+          Date: "14.10.24",
+          details:
+            "Understand the Redux Toolkit for simplifying Redux state management. Learn about createSlice, configureStore, and Redux dev tools.",
+        },
+        {
+          Topic: "Performance Optimization",
+          Date: "15.10.24",
+          details:
+            "Learn techniques to optimize React applications for performance, such as memoization, lazy loading, and avoiding unnecessary re-renders.",
+        },
+        {
+          Topic: "Code Splitting",
+          Date: "16.10.24",
+          details:
+            "Explore code splitting and dynamic imports to improve React application performance. Learn to load resources as needed.",
+        },
+        {
+          Topic: "Lazy Loading",
+          Date: "17.10.24",
+          details:
+            "Understand lazy loading in React to improve page load times. Learn how to use React.lazy and Suspense.",
+        },
+        {
+          Topic: "Testing Components",
+          Date: "18.10.24",
+          details:
+            "Learn how to test React components using testing libraries like Jest and React Testing Library. Understand the basics of writing unit tests.",
+        },
+        {
+          Topic: "Custom Hooks",
+          Date: "21.10.24",
+          details:
+            "Explore custom hooks in React for reusing logic across components. Learn how to create and manage reusable hooks.",
+        },
+        {
+          Topic: "Deployment",
+          Date: "22.10.24",
+          details:
+            "Master the process of deploying React applications to platforms like Vercel, Netlify, or traditional servers. Learn best practices for deployment.",
+        },
+        {
+          Topic: "Introduction to Node.js",
+          Date: "23.10.24",
+          details:
+          "Get introduced to Node.js and its runtime environment. Understand its architecture and how it enables server-side JavaScript execution.",
+        },
+        {
+          Topic: "File System",
+          Date: "24.10.24",
+          details:
+          "Learn about the Node.js file system module for reading, writing, and managing files. Understand synchronous and asynchronous methods.",
+        },
+        {
+          Topic: "Modules",
+          Date: "25.10.24",
+          details:
+          "Understand Node.js modules, including core and third-party modules. Learn to create custom modules and use require and import statements.",
+        },
+        {
+          Topic: "Debugging",
+          Date: "04.11.24",
+          details:
+          "Explore debugging techniques in Node.js. Learn how to use the built-in debugger and external tools to resolve issues.",
+        },
+        {
+          Topic: "Best Practices",
+          Date: "05.11.24",
+          details:
+            "Understand best practices for writing clean and efficient Node.js code. Learn techniques for modularization, testing, and logging.",
+        },
+        {
+          Topic: "Authentication",
+          Date: "06.11.24",
+          details:
+          "Learn about user authentication using Node.js. Explore libraries like Passport.js for implementing authentication mechanisms.",
+        },
+        {
+          Topic: "Authorization",
+          Date: "07.11.24",
+          details:
+          "Understand authorization techniques in Node.js. Learn to manage user roles and permissions securely.",
+        },
+        {
+          Topic: "File Uploads",
+          Date: "08.11.24",
+          details:
+          "Explore file upload handling in Node.js using libraries like Multer. Learn how to manage and store uploaded files.",
+        },
+        {
+          Topic: "Performance",
+          Date: "11.11.24",
+          details:
+          "Learn techniques to improve Node.js application performance, such as clustering, caching, and load balancing.",
+        },
+        {
+          Topic: "Deployment",
+          Date: "12.11.24",
+          details:
+            "Master the process of deploying Node.js applications to production environments. Learn best practices for deployment and monitoring.",
+        },
+        {
+          Topic: "Basics of Express",
+          Date: "13.11.24",
+          details:
+          "Get introduced to Express.js and its role in simplifying server-side development. Learn to create a basic Express server.",
+        },
+        {
+          Topic: "Routing",
+          Date: "14.11.24",
+          details:
+          "Learn routing in Express.js to manage requests and responses. Understand how to define dynamic and static routes.",
+        },
+        {
+          Topic: "Error Handling",
+          Date: "18.11.24",
+          details:
+          "Master error handling in Express.js. Learn techniques to catch and manage application-level errors effectively.",
+        },
+        {
+          Topic: "Security",
+          Date: "19.11.24",
+          details:
+            "Learn about securing Express.js applications. Explore techniques like rate limiting, sanitizing inputs, and managing CORS.",
+        },
+        {
+          Topic: "Basics of MongoDB",
+          Date: "20.11.24",
+          details:
+          "Understand the basics of MongoDB, including collections and documents. Learn to set up a database and insert data.",
+        },
+        {
+          Topic: "CRUD Operations",
+          Date: "21.11.24",
+          details:
+          "Learn CRUD operations in MongoDB for managing data. Understand how to create, read, update, and delete documents.",
+        },
+        {
+          Topic: "Aggregations",
+          Date: "22.11.24",
+          details:
+          "Explore MongoDB aggregations to process and analyze data. Learn about pipelines, stages, and operators for advanced queries.",
+        },
+        {
+          Topic: "Indexing",
+          Date: "25.11.24",
+          details:
+          "Understand indexing in MongoDB to speed up query performance. Learn how to create and manage indexes for optimal performance.",
+        },
+        {
+          Topic: "Best Practices",
+          Date: "26.11.24",
+          details:
+            "Master MongoDB best practices for schema design. Learn how to structure your data for scalability and efficiency.",
+        },
+        {
+          Topic: "OAuth",
+          Date: "27.11.24",
+          details:
+          "Learn OAuth authentication for securing user accounts in web applications. Explore third-party authentication providers.",
+        },
+        {
+          Topic: "JWT",
+          Date: "28.11.24",
+          details:
+          "Understand JSON Web Tokens (JWT) for secure token-based authentication. Learn how to issue and verify JWTs in web applications.",
+        },
+        {
+          Topic: "Sessions",
+          Date: "29.11.24",
+          details:
+          "Explore sessions for maintaining user login states in web applications. Learn how to store and manage session data.",
+        },
+        {
+          Topic: "Security Best Practices",
+          Date: "02.12.24",
+          details:
+          "Learn security best practices for web applications. Understand techniques like input validation, encryption, and securing APIs.",
+        },
+        {
+          Topic: "Implementation",
+          Date: "03.12.24",
+          details:
+            "Learn how to implement authentication and authorization in web applications. Explore strategies for protecting sensitive routes and resources.",
+        },
+        {
+          Topic: "Connecting Frontend and Backend",
+          Date: "04.12.24",
+          details:
+          "Learn how to integrate the frontend and backend of web applications. Understand how to manage data flow using APIs.",
+        },
+        {
+          Topic: "REST APIs",
+          Date: "05.12.24",
+          details:
+          "Master REST API design principles for building scalable and maintainable APIs. Learn how to structure endpoints, responses, and error handling.",
+        },
+        {
+          Topic: "Error Handling",
+          Date: "06.12.24",
+          details:
+          "Dive deeper into error handling in full-stack applications. Learn techniques to manage errors across the frontend and backend.",
+        },
+        {
+          Topic: "Testing",
+          Date: "10.12.24",
+          details:
+            "Learn testing techniques for full-stack applications. Understand how to write tests for both frontend and backend components.",
+        },
+        {
+          Topic: "Deployment",
+          Date: "11.12.24",
+          details:
+            "Understand the process of deploying full-stack applications. Learn how to deploy both the frontend and backend to hosting platforms.",
+        },
+        {
+          Topic: "Integration",
+          Date: "12.12.24",
+          details:
+            "Master CI/CD (Continuous Integration/Continuous Deployment) pipelines for automating the deployment of full-stack applications.",
+        },
+        {
+          Topic: "Git",
+          Date: "13.12.24",
+          details:
+            "Explore version control best practices using Git. Learn how to manage branches, merges, and pull requests effectively.",
+        },
+        {
+          Topic: "Structure and Setup",
+          Date: "16.12.24",
+          details:
+            "Understand the structure and setup of a full-stack project. Learn how to organize your codebase for scalability and maintainability.",
+        },
+        {
+          Topic: "Optimization",
+          Date: "17.12.24",
+          details:
+            "Learn about performance optimization techniques for full-stack applications. Focus on reducing loading times and enhancing user experience.",
+        },
+        {
+          Topic: "Debugging",
+          Date: "18.12.24",
+          details:
+            "Master debugging and error logging in full-stack applications. Learn how to track down issues and improve code quality.",
+        },
+        {
+          Topic: "Setup",
+          Date: "19.12.24",
+          details:
+            "Explore advanced project setup for large-scale full-stack applications. Understand how to structure complex applications effectively.",
+        },
+        {
+          Topic: "Planning and Development",
+          Date: "20.12.24",
+          details:
+            "Get started with project planning and development. Learn how to break down large features and tasks into manageable steps.",
+        },
+        {
+          Topic: "Deployment",
+          Date: "23.12.24",
+          details:
+            "Understand agile project management for full-stack projects. Learn how to use Scrum, Kanban, and other methodologies to manage your work.",
+        },
+        {
+          Topic: "Advanced Features",
+          Date: "24.12.24",
+          details:
+            "Learn how to implement advanced features in your project. Focus on adding new functionalities that align with user needs.",
+        },
+        {
+          Topic: "Optimization",
+          Date: "25.12.24",
+          details:
+            "Optimize your full-stack application for better performance. Learn how to manage resource usage and improve scalability.",
+        },
+        {
+          Topic: "Bug Fixing",
+          Date: "26.12.24",
+          details:
+            "Test your project for bugs and issues. Learn how to conduct manual and automated tests to ensure reliability.",
+        },
+        {
+          Topic: "Final Review",
+          Date: "27.12.24",
+          details:
+            "Review your project progress and reflect on what you've learned during the process. Make any final improvements before completing the project.",
         },
       ];
 
-      const weeksContainer = document.getElementById("weeks");
+      const daysContainer = document.getElementById("days");
 
-      courseData.forEach((weekData) => {
-        const weekDiv = document.createElement("div");
-        weekDiv.classList.add("week");
+      courseData.forEach((dayData) => {
+        const dayDiv = document.createElement("div");
+        dayDiv.classList.add("day");
 
-        const title = document.createElement("h3");
-        title.textContent = `Week ${weekData.week}`;
+        const date = document.createElement("p");
+        date.innerHTML = `<strong>Date - </strong> ${dayData.Date} `;
 
-        const summary = document.createElement("h4");
-        summary.textContent = `Topic - ${weekData.summary}`;
+        const topic = document.createElement("p");
+        topic.innerHTML = `<strong>Topic - </strong>${dayData.Topic}`;
 
-        const details = document.createElement("h4");
-        details.textContent = "Details -";
+        const summary = document.createElement("p");
+        summary.innerHTML = `<strong>Details - </strong>${dayData.details}`;
 
-        const detailsDiv = document.createElement("div");
-        detailsDiv.classList.add("details");
-        weekData.details.forEach((detail) => {
-          const detailP = document.createElement("p");
-          detailP.textContent = detail;
-          detailsDiv.appendChild(detailP);
-        });
+        dayDiv.appendChild(date);
+        dayDiv.appendChild(topic);
+        dayDiv.appendChild(summary);
 
-        weekDiv.appendChild(title);
-        weekDiv.appendChild(summary);
-        weekDiv.appendChild(details);
-        weekDiv.appendChild(detailsDiv);
-
-        weeksContainer.appendChild(weekDiv);
+        daysContainer.appendChild(dayDiv);
       });
     </script>
   </body>
